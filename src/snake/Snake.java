@@ -1,10 +1,13 @@
 
 package snake;
 
-public class Snake {
+import java.util.ArrayList;
 
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class Snake {
+    
+    // тело змеи - содержит набор координат
+    private ArrayList<Position> body;
+    // параметр определеяет должна ли змея расти
+    private boolean bGrowing;
     
 }
