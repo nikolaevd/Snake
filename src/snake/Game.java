@@ -1,11 +1,13 @@
 
 package snake;
 
+import java.util.ArrayList;
+
 public class Game {
     
     // устанавливаем размер поля
-    private static int sizeByX = 18;
-    private static int sizeByY = 30;
+    private static final int sizeByX = 18;
+    private static final int sizeByY = 30;
     
     // направления движения
     private static final int DIR_NORTH = 1;
@@ -20,7 +22,9 @@ public class Game {
     private int[][] field;
     
     // змея - массив двумерных координат
-    private Snake snake;
+    private ArrayList<Position> snake;
+    
+    private boolean bGrwoing;
     
     // текущее направление движения
     private int curDirection = Game.DIR_EAST;
