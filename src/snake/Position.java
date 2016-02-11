@@ -13,4 +13,12 @@ public class Position {
         
     }
     
+    public int getPosByX() {
+        return posByX;
+    }
+
+    public int getPosByY() {
+        return posByY;
+    }
+    
 }
