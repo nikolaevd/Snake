@@ -1,5 +1,5 @@
 
-package snake;
+package com.snake;
 
 import java.util.ArrayList;
 
@@ -10,45 +10,45 @@ import java.util.ArrayList;
 */
 
 public class Game {
-    
+
     private static final int sizeByX = 18;
     private static final int sizeByY = 30;
-    
+
     private static final int DIR_NORTH = 1;
     private static final int DIR_EAST = 2;
     private static final int DIR_SOUTH = 3;
     private static final int DIR_WEST = 4;
-    
+
     private int score = 0;
     private int isGrowing = 0;
-    
+
     private int[][] field = new int[sizeByX][sizeByY];
-    
+
     private ArrayList<Position> snake = new ArrayList<Position>();
-    
+
     private int curDirection = Game.DIR_EAST;
-    
+
     Game(){
         for(int x = 0; x < sizeByX; x++){
             for(int y = 0; y < sizeByY; y++){
                 field[x][y] = 0;
             }
         }
-        
-        snake.add(new Position(2, 2));        
+
+        snake.add(new Position(2, 2));
         field[2][2] = -1;
         snake.add(new Position(2, 3));
         field[2][3] = -1;
         snake.add(new Position(2, 4));
         field[2][4] = -1;
-        
+
         AddFruit();
     }
-    
+
     private void AddFruit(){
-        
+
         boolean bFlag = true;
-        
+
         while(bFlag){
             int x = (int)(Math.random() * sizeByX);
             int y = (int)(Math.random() * sizeByY);
@@ -57,11 +57,11 @@ public class Game {
                 field[x][y] = -2;
             }
         }
-        
+
     }
-    
+
     public boolean nextMove(){
-        
+
         switch(curDirection){
             case DIR_NORTH:{
                 int nextX = snake.get(snake.size() - 1).getPosByX();
@@ -92,7 +92,7 @@ public class Game {
                 else{
                     return false;
                 }
-            }               
+            }
             case DIR_WEST:{
                 int nextX = snake.get(snake.size() - 1).getPosByX() - 1;
                 int nextY = snake.get(snake.size() - 1).getPosByY();
@@ -102,19 +102,19 @@ public class Game {
                 else{
                     return false;
                 }
-            }              
+            }
         }
-        
+
         return false;
     }
-    
+
     private boolean checkBorder(int x, int y){
         if(x >= 0 && x <= sizeByX && y >= 0 && y <= sizeByY){
             return true;
         }
         return false;
     }
-    
+
     private boolean checkNextPosition(int x, int y){
         switch (field[x][y]) {
             case 0:
@@ -133,11 +133,11 @@ public class Game {
             case -2:
                 isGrowing += 2;
                 score += 10;
-                
+
                 field[x][y] = 0;
                 snake.add(new Position(x, y));
                 field[x][y] = -1;
-                
+
                 AddFruit();
                 return true;
             default:
@@ -164,13 +164,13 @@ public class Game {
     public void setCurDirection(int curDirection) {
         this.curDirection = curDirection;
     }
-    
+
     public void clearScore(){
         this.score = 0;
     }
-    
+
     public static void main(String[] args) {
         // TODO code application logic here
     }
-    
+
 }
