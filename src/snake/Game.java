@@ -60,49 +60,49 @@ public class Game {
         
     }
     
-    private boolean nextMove(){
+    public boolean nextMove(){
         
         switch(curDirection){
-            case DIR_NORTH:
+            case DIR_NORTH:{
                 int nextX = snake.get(snake.size() - 1).getPosByX();
                 int nextY = snake.get(snake.size() - 1).getPosByY() + 1;
                 if(checkBorder(nextX, nextY)){
-                    if(field[nextX][nextY] == 0){
-                        if(isGrowing > 0){
-                            isGrowing--;
-                        }
-                        else{
-                            field[snake.get(0).getPosByX()][snake.get(0).getPosByY()] = 0;
-                            snake.remove(0);
-                        }
-                        snake.add(new Position(nextX, nextY));
-                        field[nextX][nextY] = -1;
-                        return true;
-                    }
-                    else if(field[nextX][nextY] == -1){
-                        return false;
-                    }
-                    else if(field[nextX][nextY] == -2){
-                        isGrowing += 2;
-                        score += 10;
-                        
-                        field[nextX][nextY] = 0;
-                        snake.add(new Position(nextX, nextY));
-                        field[nextX][nextY] = -1;
-                        
-                        AddFruit();
-                        return true;
-                    }
+                    return checkNextPosition(nextX, nextY);
                 }
                 else{
                     return false;
                 }
-            case DIR_EAST:
-                
-            case DIR_SOUTH:
-                
-            case DIR_WEST:
-                              
+            }
+            case DIR_EAST:{
+                int nextX = snake.get(snake.size() - 1).getPosByX() + 1;
+                int nextY = snake.get(snake.size() - 1).getPosByY();
+                if(checkBorder(nextX, nextY)){
+                    return checkNextPosition(nextX, nextY);
+                }
+                else{
+                    return false;
+                }
+            }
+            case DIR_SOUTH:{
+                int nextX = snake.get(snake.size() - 1).getPosByX();
+                int nextY = snake.get(snake.size() - 1).getPosByY() - 1;
+                if(checkBorder(nextX, nextY)){
+                    return checkNextPosition(nextX, nextY);
+                }
+                else{
+                    return false;
+                }
+            }               
+            case DIR_WEST:{
+                int nextX = snake.get(snake.size() - 1).getPosByX() - 1;
+                int nextY = snake.get(snake.size() - 1).getPosByY();
+                if(checkBorder(nextX, nextY)){
+                    return checkNextPosition(nextX, nextY);
+                }
+                else{
+                    return false;
+                }
+            }              
         }
         
         return false;
@@ -113,6 +113,36 @@ public class Game {
             return true;
         }
         return false;
+    }
+    
+    private boolean checkNextPosition(int x, int y){
+        switch (field[x][y]) {
+            case 0:
+                if(isGrowing > 0){
+                    isGrowing--;
+                }
+                else{
+                    field[snake.get(0).getPosByX()][snake.get(0).getPosByY()] = 0;
+                    snake.remove(0);
+                }
+                snake.add(new Position(x, y));
+                field[x][y] = -1;
+                return true;
+            case -1:
+                return false;
+            case -2:
+                isGrowing += 2;
+                score += 10;
+                
+                field[x][y] = 0;
+                snake.add(new Position(x, y));
+                field[x][y] = -1;
+                
+                AddFruit();
+                return true;
+            default:
+                return false;
+        }
     }
 
     public int[][] getField() {
