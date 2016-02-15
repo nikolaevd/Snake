@@ -4,14 +4,27 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/lose"
-        android:id="@+id/textView"
-        android:layout_gravity="center_vertical"
-        android:autoText="true"
-        android:clickable="false"
-        android:gravity="center_horizontal" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="\@string/lose"
+            android:id="@+id/textView"
+            android:layout_above="@+id/button2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="195dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_button"
+            android:id="@+id/button2"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="54dp" />
+    </RelativeLayout>
 </LinearLayout>

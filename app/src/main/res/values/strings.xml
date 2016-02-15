@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Snake</string>
-    <string name="start_button">Начать игру</string>
+    <string name="start_button">Играть</string>
     <string name="lose">Вы проиграли :(</string>
 </resources>
