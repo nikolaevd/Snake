@@ -43,9 +43,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 
     @Override
     public void onClick(View v) {
-        Intent i = new Intent(this, com.snake.GameActivity.class);
+        Intent intent = new Intent(this, com.snake.GameActivity.class);
         GAME_MODE=0;
         GAME_SCORE=0;
-        this.startActivity(i);
+        this.startActivity(intent);
     }
 }
