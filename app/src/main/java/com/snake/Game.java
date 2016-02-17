@@ -161,7 +161,7 @@ public class Game {
         return snake;
     }
 
-    public int getSnakeLenght() {
+    public int getSnakeLength() {
         return snake.size();
     }
 

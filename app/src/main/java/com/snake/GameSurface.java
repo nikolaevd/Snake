@@ -11,7 +11,7 @@ import android.view.SurfaceView;
 public class GameSurface extends SurfaceView {
 
     Game game;
-    Bitmap head, till, body, bg, fruite;
+    Bitmap head, till, body, bg, fruit;
     String someText;
     float x, y;
 
@@ -28,7 +28,7 @@ public class GameSurface extends SurfaceView {
         till = BitmapFactory.decodeResource(context.getResources(), R.drawable.till);
         body = BitmapFactory.decodeResource(context.getResources(), R.drawable.body);
         bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg);
-        fruite = BitmapFactory.decodeResource(context.getResources(), R.drawable.fruite);
+        fruit = BitmapFactory.decodeResource(context.getResources(), R.drawable.fruite);
     }
 
     public void setSomeText(String someText) {
@@ -55,24 +55,24 @@ public class GameSurface extends SurfaceView {
         paint.setColor(Color.BLACK);
         paint.setAlpha(128);
 
-        Bitmap bitmapFruite = Bitmap.createScaledBitmap(fruite, mx, my, true);
+        Bitmap bitmapFruite = Bitmap.createScaledBitmap(fruit, mx, my, true);
 
         for (int i = 0; i < Game.getSizeByY(); i++) {
             for (int j = 0; j < Game.getSizeByY(); j++) {
                 c.drawBitmap(bg, mx * i, my * j, paint);
                 if (game.getField()[i][j] > 1) {
-                    c.drawBitmap(fruite, mx * i, my * j, paint);
+                    c.drawBitmap(fruit, mx * i, my * j, paint);
                 }
             }
         }
         paint.setAlpha(0);
 
-        for (int i = 0; i < game.getSnakeLenght(); i++) {
+        for (int i = 0; i < game.getSnakeLength(); i++) {
             c.drawBitmap(body, game.getSnake().get(i).getPosByX() * mx, game.getSnake().get(i).getPosByX() * my, new Paint());
             if (i == 0) {
                 c.drawBitmap(till, game.getSnake().get(i).getPosByX() * mx, game.getSnake().get(i).getPosByY() * my, new Paint());
             }
-            if (i == game.getSnakeLenght() - 1) {
+            if (i == game.getSnakeLength() - 1) {
                 c.drawBitmap(head, game.getSnake().get(i).getPosByX() * mx, game.getSnake().get(i).getPosByY() * my, new Paint());
             }
         }
@@ -81,4 +81,5 @@ public class GameSurface extends SurfaceView {
         paint.setTextSize(15);
         c.drawText(someText, 50, 50,  paint);
     }
+
 }
