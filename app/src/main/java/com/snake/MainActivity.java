@@ -1,6 +1,6 @@
 package com.snake;
 
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,8 +25,27 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if(GAME_MODE == 0){
+            setContentView(R.layout.activity_main);
+            button = (Button) this.findViewById(R.id.button);
+            button.setOnClickListener(this);
+        }
+        else{
+            setContentView(R.layout.activity_lose);
+            button = (Button) this.findViewById(R.id.button);
+            textView = (TextView) this.findViewById(R.id.textView);
+            button.setOnClickListener(this);
+            textView.setText("Вы набрали " + GAME_SCORE + " очков.");
+        }
+    }
+
+    @Override
     public void onClick(View v) {
-        //textView = (TextView) findViewById(R.id.button);
-        //textView.setText("Android it's easy!");
+        Intent i = new Intent(this, com.snake.GameActivity.class);
+        GAME_MODE=0;
+        GAME_SCORE=0;
+        this.startActivity(i);
     }
 }
