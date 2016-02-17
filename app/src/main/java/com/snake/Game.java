@@ -14,10 +14,10 @@ public class Game {
     private static final int sizeByX = 18;
     private static final int sizeByY = 30;
 
-    private static final int DIR_NORTH = 1;
-    private static final int DIR_EAST = 2;
-    private static final int DIR_SOUTH = 3;
-    private static final int DIR_WEST = 4;
+    public static final int DIR_NORTH = 1;
+    public static final int DIR_EAST = 2;
+    public static final int DIR_SOUTH = 3;
+    public static final int DIR_WEST = 4;
 
     private int score = 0;
     private int isGrowing = 0;
@@ -151,6 +151,10 @@ public class Game {
 
     public static int getSizeByY() {
         return sizeByY;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public int[][] getField() {

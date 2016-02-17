@@ -29,12 +29,12 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
         super.onStart();
         if(GAME_MODE == 0){
             setContentView(R.layout.activity_main);
-            button = (Button) this.findViewById(R.id.button);
+            button = (Button) this.findViewById(R.id.button0);
             button.setOnClickListener(this);
         }
         else{
             setContentView(R.layout.activity_lose);
-            button = (Button) this.findViewById(R.id.button);
+            button = (Button) this.findViewById(R.id.button1);
             textView = (TextView) this.findViewById(R.id.textView);
             button.setOnClickListener(this);
             textView.setText("Вы набрали " + GAME_SCORE + " очков.");
