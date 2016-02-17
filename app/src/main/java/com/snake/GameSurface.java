@@ -28,14 +28,14 @@ public class GameSurface extends SurfaceView {
         till = BitmapFactory.decodeResource(context.getResources(), R.drawable.till);
         body = BitmapFactory.decodeResource(context.getResources(), R.drawable.body);
         bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg);
-        fruit = BitmapFactory.decodeResource(context.getResources(), R.drawable.fruite);
+        fruit = BitmapFactory.decodeResource(context.getResources(), R.drawable.fruit);
     }
 
     public void setSomeText(String someText) {
         this.someText = someText;
     }
 
-    void drawSnake(Canvas c) {
+    public void drawSnake(Canvas c) {
         int width = c.getWidth();
         int height = c.getHeight();
         int mx = width / Game.getSizeByX();
@@ -44,7 +44,7 @@ public class GameSurface extends SurfaceView {
         Bitmap bitmapHead = Bitmap.createScaledBitmap(head, mx, my, true);
         Bitmap bitmapBody = Bitmap.createScaledBitmap(body, mx, my, true);
         Bitmap bitmapTill = Bitmap.createScaledBitmap(till, mx, my, true);
-        Bitmap BitmapBg = Bitmap.createScaledBitmap(bg, mx, my, true);
+        Bitmap bitmapBg = Bitmap.createScaledBitmap(bg, mx, my, true);
 
         Paint paint = new Paint();
         paint.setColor(Color.CYAN);
@@ -55,7 +55,7 @@ public class GameSurface extends SurfaceView {
         paint.setColor(Color.BLACK);
         paint.setAlpha(128);
 
-        Bitmap bitmapFruite = Bitmap.createScaledBitmap(fruit, mx, my, true);
+        Bitmap bitmapFruit = Bitmap.createScaledBitmap(fruit, mx, my, true);
 
         for (int i = 0; i < Game.getSizeByY(); i++) {
             for (int j = 0; j < Game.getSizeByY(); j++) {
