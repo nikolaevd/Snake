@@ -145,6 +145,14 @@ public class Game {
         }
     }
 
+    public static int getSizeByX() {
+        return sizeByX;
+    }
+
+    public static int getSizeByY() {
+        return sizeByY;
+    }
+
     public int[][] getField() {
         return field;
     }
@@ -167,10 +175,6 @@ public class Game {
 
     public void clearScore(){
         this.score = 0;
-    }
-
-    public static void main(String[] args) {
-        // TODO code application logic here
     }
 
 }
