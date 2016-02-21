@@ -9,24 +9,27 @@ import java.util.ArrayList;
      2 - ячейку занимает фрукт
 */
 
-public class Game {
+public class Game{
 
     public static final int sizeByX = 18;
     public static final int sizeByY = 30;
 
-    public static final int DIR_NORTH = 1;
-    public static final int DIR_EAST = 2;
-    public static final int DIR_SOUTH = 3;
-    public static final int DIR_WEST = 4;
+    // направление движения
+    public static final int NORTH = 1;
+    public static final int EAST = 2;
+    public static final int SOUTH = 3;
+    public static final int WEST = 4;
 
+    // переменная хранит набранные очки
     private int score = 0;
+    // признак - растет ли змейка
     private int isGrowing = 0;
-
+    // массив представляет собой игровое поле
     private int[][] field = new int[sizeByX][sizeByY];
-
+    // тело змейки
     private ArrayList<Position> snake = new ArrayList<Position>();
-
-    private int curDirection = Game.DIR_EAST;
+    // переменная содержит текущее направление
+    private int curDirection = Game.EAST;
 
     Game(){
         for(int x = 0; x < sizeByX; x++){
@@ -45,6 +48,7 @@ public class Game {
         AddFruit();
     }
 
+    // добавить фрукт на игровое поле
     private void AddFruit(){
 
         boolean bFlag = true;
@@ -60,10 +64,11 @@ public class Game {
 
     }
 
+    // выполнить шаг в заданном направлении
     public boolean nextMove(){
 
         switch(curDirection){
-            case DIR_NORTH:{
+            case NORTH:{
                 int nextX = snake.get(snake.size() - 1).getPosByX();
                 int nextY = snake.get(snake.size() - 1).getPosByY() + 1;
                 if(checkBorder(nextX, nextY)){
@@ -73,7 +78,7 @@ public class Game {
                     return false;
                 }
             }
-            case DIR_EAST:{
+            case EAST:{
                 int nextX = snake.get(snake.size() - 1).getPosByX() + 1;
                 int nextY = snake.get(snake.size() - 1).getPosByY();
                 if(checkBorder(nextX, nextY)){
@@ -83,7 +88,7 @@ public class Game {
                     return false;
                 }
             }
-            case DIR_SOUTH:{
+            case SOUTH:{
                 int nextX = snake.get(snake.size() - 1).getPosByX();
                 int nextY = snake.get(snake.size() - 1).getPosByY() - 1;
                 if(checkBorder(nextX, nextY)){
@@ -93,7 +98,7 @@ public class Game {
                     return false;
                 }
             }
-            case DIR_WEST:{
+            case WEST:{
                 int nextX = snake.get(snake.size() - 1).getPosByX() - 1;
                 int nextY = snake.get(snake.size() - 1).getPosByY();
                 if(checkBorder(nextX, nextY)){
@@ -108,6 +113,7 @@ public class Game {
         return false;
     }
 
+    // проверить, не упирается ли змейка в границы игрового поля
     private boolean checkBorder(int x, int y){
         if(x >= 0 && x < sizeByX && y >= 0 && y < sizeByY){
             return true;

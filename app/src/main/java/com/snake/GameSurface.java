@@ -14,15 +14,7 @@ public class GameSurface extends SurfaceView {
     Bitmap bitmapHead, bitmapTill, bitmapBody, bitmapBackGround, bitmapFruit;
     float x, y;
 
-    // установка новых кординат телефона в пространстве
-    // для того чтобы правильно нарисовать кружки на фоне
-    public void setXY(float x, float y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    // конструктор в котором мы загружаем
-    // из ресурсов битмапы и добавляем метод обратного вызова для Surface
+    // в консрукторе загружаем битмапы (из ресурсов) и добавляем метод обратного вызова для Surface
     public GameSurface(Context context){
         super(context);
         // создаем новое игровое поле
@@ -40,6 +32,7 @@ public class GameSurface extends SurfaceView {
                 R.drawable.fruit);
     }
 
+    // метод рисует змейку и фрукты
     public void drawSnake(Canvas canvas){
 
         int width = canvas.getWidth();
@@ -47,44 +40,36 @@ public class GameSurface extends SurfaceView {
         int x = width / Game.sizeByX;
         int y = height / Game.sizeByY;
 
-        // стрейчим битмапы
         Bitmap head = Bitmap.createScaledBitmap(bitmapHead, x, y, true);
         Bitmap body = Bitmap.createScaledBitmap(bitmapBody, x, y, true);
         Bitmap till = Bitmap.createScaledBitmap(bitmapTill, x, y, true);
         Bitmap backGround = Bitmap.createScaledBitmap(bitmapBackGround, x, y, true);
         Bitmap fruit = Bitmap.createScaledBitmap(bitmapFruit, x, y, true);
 
-        // создаем кисточку
         Paint paint = new Paint();
-        paint.setColor(Color.CYAN);
-
-        // рисуем круги
-        canvas.drawCircle(width / 2, height / 2, width / 4, paint);
-        paint.setColor(Color.BLUE);
-        canvas.drawCircle(width / 2 - x * 5, height / 2 + y * 5, width / 10, paint);
         paint.setColor(Color.BLACK);
         paint.setAlpha(128);
 
         // рисуем игровое поле с фруктами на нем
-        for (int i = 0; i < Game.sizeByX; i++) {
-            for (int j = 0; j < Game.sizeByY; j++) {
+        for(int i = 0; i < Game.sizeByX; i++) {
+            for(int j = 0; j < Game.sizeByY; j++) {
                 canvas.drawBitmap(backGround, x * i, y * j, paint);
-                if (game.getField()[i][j] > 1) {
+                if(game.getField()[i][j] > 1) {
                     canvas.drawBitmap(fruit, x * i, y * j, paint);
                 }
             }
         }
         paint.setAlpha(0);
 
-        // рисуем змею
-        for (int i = 0; i < game.getSnakeLength(); i++) {
+        // рисуем змейку
+        for(int i = 0; i < game.getSnakeLength(); i++) {
             canvas.drawBitmap(body, game.getSnake().get(i).getPosByX() * x, game
                     .getSnake().get(i).getPosByY() * y, new Paint());
-            if (i == 0) {
+            if(i == 0) {
                 canvas.drawBitmap(till, game.getSnake().get(i).getPosByX() * x, game
                         .getSnake().get(i).getPosByY() * y, new Paint());
             }
-            if (i == game.getSnakeLength() - 1) {
+            if(i == game.getSnakeLength() - 1) {
                 canvas.drawBitmap(head, game.getSnake().get(i).getPosByX() * x, game
                         .getSnake().get(i).getPosByY() * y, new Paint());
             }
