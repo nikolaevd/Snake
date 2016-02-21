@@ -1,14 +1,14 @@
 package com.snake;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends ActionBarActivity implements OnClickListener{
+public class MainActivity extends Activity implements OnClickListener{
 
     // 0 - первый запуск
     // 1 - запуск после проигрыша
@@ -19,13 +19,13 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     Button button;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         if(GAME_MODE == 0){
             setContentView(R.layout.activity_main);
@@ -36,8 +36,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
             setContentView(R.layout.activity_lose);
             button = (Button) this.findViewById(R.id.button1);
             textView = (TextView) this.findViewById(R.id.textView);
+			textView.setText("Вы набрали " + GAME_SCORE + " очков.");
             button.setOnClickListener(this);
-            textView.setText("Вы набрали " + GAME_SCORE + " очков.");
+            
         }
     }
 
