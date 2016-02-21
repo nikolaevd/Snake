@@ -12,7 +12,7 @@ public class GameSurface extends SurfaceView {
 
     Game game;
     Bitmap head, till, body, bg, fruit;
-    String someText = "123";
+    String someText = "012345";
     float x, y;
 
     public void setXY(float x, float y){
@@ -27,7 +27,7 @@ public class GameSurface extends SurfaceView {
         head = BitmapFactory.decodeResource(context.getResources(), R.drawable.head);
         till = BitmapFactory.decodeResource(context.getResources(), R.drawable.till);
         body = BitmapFactory.decodeResource(context.getResources(), R.drawable.body);
-        bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg);
+        bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.back_ground);
         fruit = BitmapFactory.decodeResource(context.getResources(), R.drawable.fruit);
     }
 
