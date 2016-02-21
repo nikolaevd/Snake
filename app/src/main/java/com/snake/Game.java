@@ -109,7 +109,7 @@ public class Game {
     }
 
     private boolean checkBorder(int x, int y){
-        if(x >= 0 && x <= sizeByX && y >= 0 && y <= sizeByY){
+        if(x >= 0 && x < sizeByX && y >= 0 && y < sizeByY){
             return true;
         }
         return false;
