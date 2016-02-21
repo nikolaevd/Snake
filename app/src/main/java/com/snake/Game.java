@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 /*
      0 - пустая ячейка
-    -1 - ячейку занимает тело змеи
-    -2 - ячейку занимает фрукт
+     1 - ячейку занимает тело змеи
+     2 - ячейку занимает фрукт
 */
 
 public class Game {
@@ -36,11 +36,11 @@ public class Game {
         }
 
         snake.add(new Position(2, 2));
-        field[2][2] = -1;
+        field[2][2] = 1;
         snake.add(new Position(2, 3));
-        field[2][3] = -1;
+        field[2][3] = 1;
         snake.add(new Position(2, 4));
-        field[2][4] = -1;
+        field[2][4] = 1;
 
         AddFruit();
     }
@@ -54,7 +54,7 @@ public class Game {
             int y = (int)(Math.random() * sizeByY);
             if(field[x][y] == 0){
                 bFlag = false;
-                field[x][y] = -2;
+                field[x][y] = 2;
             }
         }
 
@@ -126,17 +126,17 @@ public class Game {
                     snake.remove(0);
                 }
                 snake.add(new Position(x, y));
-                field[x][y] = -1;
+                field[x][y] = 1;
                 return true;
-            case -1:
+            case 1:
                 return false;
-            case -2:
+            case 2:
                 isGrowing += 2;
                 score += 10;
 
                 field[x][y] = 0;
                 snake.add(new Position(x, y));
-                field[x][y] = -1;
+                field[x][y] = 1;
 
                 AddFruit();
                 return true;

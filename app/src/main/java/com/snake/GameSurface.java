@@ -42,7 +42,7 @@ public class GameSurface extends SurfaceView {
     }
 
     // Рисуем здесь
-    void drawSnake(Canvas canvas){
+    public void drawSnake(Canvas canvas){
 
         int width = canvas.getWidth();
         int height = canvas.getHeight();
