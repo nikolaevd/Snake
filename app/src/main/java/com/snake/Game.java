@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class Game {
 
-    private static final int sizeByX = 18;
-    private static final int sizeByY = 30;
+    public static final int sizeByX = 18;
+    public static final int sizeByY = 30;
 
     public static final int DIR_NORTH = 1;
     public static final int DIR_EAST = 2;
@@ -143,14 +143,6 @@ public class Game {
             default:
                 return false;
         }
-    }
-
-    public static int getSizeByX() {
-        return sizeByX;
-    }
-
-    public static int getSizeByY() {
-        return sizeByY;
     }
 
     public int getScore() {

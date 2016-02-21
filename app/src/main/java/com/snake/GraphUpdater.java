@@ -15,11 +15,11 @@ public class GraphUpdater extends TimerTask {
 
     @Override
     public void run() {
-        Canvas c = gameSurface.getHolder().lockCanvas();
-        if (c!=null){
-            c.drawColor(Color.BLACK);
-            gameSurface.drawSnake(c);
-            gameSurface.getHolder().unlockCanvasAndPost(c);
+        Canvas canvas = gameSurface.getHolder().lockCanvas();
+        if (canvas != null){
+            canvas.drawColor(Color.BLACK);
+            gameSurface.drawSnake(canvas);
+            gameSurface.getHolder().unlockCanvasAndPost(canvas);
         }
     }
 }
