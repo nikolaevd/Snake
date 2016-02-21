@@ -25,7 +25,8 @@ public class GameActivity extends Activity implements SensorEventListener{
     float SX = 0, SY = 0;
     boolean firstTime;
 
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         gameSurface = new GameSurface(this);
         this.setContentView(gameSurface);
@@ -47,34 +48,42 @@ public class GameActivity extends Activity implements SensorEventListener{
                 }
             }
         }
+
     }
 
     @Override
-    public void onStart() {
+    public void onStart(){
+
         super.onStart();
+
         // таймер обновления картинки
         timer.scheduleAtFixedRate(new GraphUpdater(gameSurface), 0, 100);
+
         // таймер обновления змейки
-        timer.scheduleAtFixedRate(new StepUpdater(this), 0, 100);
+        timer.scheduleAtFixedRate(new StepUpdater(this), 0, 500);
+
         // регистрируем нашу форму как объект слушающий изменения датчика - акселерометра
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
         this.firstTime = true;
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
     }
 
     @Override
-    public void onStop() {
+    public void onStop(){
+
         super.onStop();
         // останавливаем таймеры
         timer.cancel();
         timer.purge();
         // отписываемся от получения сообщений об изменении от датчика
         sensorManager.unregisterListener(this);
+
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        gameSurface.setSomeText("Your score is: " + MainActivity.GAME_SCORE);
+        //gameSurface.setSomeText("Your score is: " + MainActivity.GAME_SCORE);
 
         // получаем показания датчика
         SX = event.values[0];
@@ -102,23 +111,29 @@ public class GameActivity extends Activity implements SensorEventListener{
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
-    private int getDirection(float x, float y) {
+    private int getDirection(float x, float y){
+
         if (Math.abs(x) > Math.abs(y)) {
-            if (x > 0) {
+            if (x > 0){
                 return Game.DIR_WEST;
-            } else {
+            }
+            else{
                 return Game.DIR_EAST;
             }
-        } else {
-            if (y > 0) {
+        }
+        else{
+            if (y > 0){
                 return Game.DIR_SOUTH;
-            } else {
+            }
+            else{
                 return Game.DIR_NORTH;
             }
         }
+
     }
 
-    public void Step() {
+    public void Step(){
+
         // если ход не удался то закрываем текущую активити
         if (!gameSurface.game.nextMove()) {
             MainActivity.GAME_MODE = 1;
@@ -128,5 +143,7 @@ public class GameActivity extends Activity implements SensorEventListener{
         else{
             MainActivity.GAME_SCORE = this.gameSurface.game.getScore();
         }
+
     }
+
 }

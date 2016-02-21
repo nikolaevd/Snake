@@ -5,7 +5,7 @@ import android.graphics.Color;
 
 import java.util.TimerTask;
 
-public class GraphUpdater extends TimerTask {
+public class GraphUpdater extends TimerTask{
 
     GameSurface gameSurface;
 
@@ -14,12 +14,15 @@ public class GraphUpdater extends TimerTask {
     }
 
     @Override
-    public void run() {
+    public void run(){
+
         Canvas canvas = gameSurface.getHolder().lockCanvas();
         if (canvas != null){
             canvas.drawColor(Color.BLACK);
             gameSurface.drawSnake(canvas);
             gameSurface.getHolder().unlockCanvasAndPost(canvas);
         }
+
     }
+
 }
