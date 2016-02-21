@@ -8,7 +8,6 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-
 import java.util.List;
 import java.util.Timer;
 
@@ -33,14 +32,14 @@ public class GameActivity extends Activity implements SensorEventListener{
         timer = new Timer();
 //        height = this.getWindowManager().getDefaultDisplay().getHeight();
 //        width = this.getWindowManager().getDefaultDisplay().getWidth();
-
         DisplayMetrics displaymetrics = new DisplayMetrics();
         height = displaymetrics.widthPixels;
         width = displaymetrics.heightPixels;
 
         sensorManager = (SensorManager) getSystemService(Activity.SENSOR_SERVICE);
         List<Sensor> sensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
-        if (sensors.size() > 0) {
+
+        if (sensors.size() > 0){
             for (Sensor s : sensors) {
                 if (s.getType() == Sensor.TYPE_ACCELEROMETER) {
                     if (s == null)
@@ -62,7 +61,7 @@ public class GameActivity extends Activity implements SensorEventListener{
         // таймер обновления змейки
         timer.scheduleAtFixedRate(new StepUpdater(this), 0, 500);
 
-        // регистрируем нашу форму как объект слушающий изменения датчика - акселерометра
+        // регистрируем форму как объект слушающий изменения датчика - акселерометра
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
         this.firstTime = true;
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -82,39 +81,40 @@ public class GameActivity extends Activity implements SensorEventListener{
     }
 
     @Override
-    public void onSensorChanged(SensorEvent event) {
-        //gameSurface.setSomeText("Your score is: " + MainActivity.GAME_SCORE);
+    public void onSensorChanged(SensorEvent event){
 
         // получаем показания датчика
         SX = event.values[0];
         SY = event.values[1];
 
         // если игра уже идет, то
-        if (!this.firstTime) {
+        if (!this.firstTime){
             // получаем положение телефона в пространстве
             // с поправкой на его начальное положение
             float dirX = SX - SSX;
             float dirY = SY - SSY;
             // устанавливаем для змеи новое направление
             gameSurface.game.setCurDirection(this.getDirection(dirX, dirY));
-            // передаем в нашу повержность координаты телефона в пространстве
+            // передаем в повержность координаты телефона в пространстве
             gameSurface.setXY(dirX, dirY);
-        } else {
+        }
+        else{
             // если игра только началась делаем поправку на начальное положение телефона
             this.firstTime = false;
             SSX = SX;
             SSY = SY;
         }
+
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    public void onAccuracyChanged(Sensor sensor, int accuracy){
     }
 
     private int getDirection(float x, float y){
 
-        if (Math.abs(x) > Math.abs(y)) {
-            if (x > 0){
+        if (Math.abs(x) > Math.abs(y)){
+            if(x > 0){
                 return Game.DIR_WEST;
             }
             else{
@@ -122,7 +122,7 @@ public class GameActivity extends Activity implements SensorEventListener{
             }
         }
         else{
-            if (y > 0){
+            if(y > 0){
                 return Game.DIR_SOUTH;
             }
             else{
@@ -135,7 +135,7 @@ public class GameActivity extends Activity implements SensorEventListener{
     public void Step(){
 
         // если ход не удался то закрываем текущую активити
-        if (!gameSurface.game.nextMove()) {
+        if(!gameSurface.game.nextMove()) {
             MainActivity.GAME_MODE = 1;
             this.finish();
         }
