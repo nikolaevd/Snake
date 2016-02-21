@@ -2,7 +2,7 @@ package com.snake;
 
 import java.util.TimerTask;
 
-public class StepUpdater extends TimerTask {
+public class StepUpdater extends TimerTask{
 
     GameActivity gameActivity;
 
@@ -11,7 +11,7 @@ public class StepUpdater extends TimerTask {
     }
 
     @Override
-    public void run() {
+    public void run(){
         gameActivity.Step();
     }
 
