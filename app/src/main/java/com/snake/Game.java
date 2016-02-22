@@ -6,8 +6,9 @@ import java.util.ArrayList;
 /*
      0 - пустая ячейка
      1 - ячейку занимает тело змеи
-     2 - ячейку занимает фрукт
-     3 - ячейку занимает арбуз ( + 20 очков )
+     2 - ячейку занимает яблоко ( + 10 очков, + 2 к росту )
+     3 - ячейку занимает арбуз ( + 20 очков, + 3 к росту )
+     4 - ячейку занимает мухомор
 */
 
 public class Game{
@@ -47,6 +48,7 @@ public class Game{
         field[2][4] = 1;
 
         addFruit();
+        addPoison();
     }
 
     // добавить фрукт на игровое поле
@@ -61,6 +63,25 @@ public class Game{
                 isTrue = false;
                 field[x][y] = (2 + (int)(Math.random() * ((3 - 2) + 1)));
             }
+        }
+
+    }
+
+    // добавляем мухомор
+    private void addPoison(){
+
+        int i = 5;
+        while(i > 0){
+            boolean isTrue = true;
+            while(isTrue){
+                int x = (int)(Math.random() * sizeByX);
+                int y = (int)(Math.random() * sizeByY);
+                if(field[x][y] == 0){
+                    isTrue = false;
+                    field[x][y] = 4;
+                }
+            }
+            i--;
         }
 
     }
@@ -157,6 +178,8 @@ public class Game{
 
                 addFruit();
                 return true;
+            case 4:
+                return false;
             default:
                 return false;
         }

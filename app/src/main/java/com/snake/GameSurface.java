@@ -11,7 +11,7 @@ import android.view.SurfaceView;
 public class GameSurface extends SurfaceView{
 
     Game game;
-    Bitmap bitmapHead, bitmapTill, bitmapBody, bitmapBackGround, bitmapApple, bitmapWatermelon;
+    Bitmap bitmapHead, bitmapTill, bitmapBody, bitmapBackGround, bitmapApple, bitmapWatermelon, bitmapPoison;
     float x, y;
 
     // в консрукторе загружаем битмапы (из ресурсов) и добавляем метод обратного вызова для Surface
@@ -32,9 +32,11 @@ public class GameSurface extends SurfaceView{
                 R.drawable.apple);
         bitmapWatermelon = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.watermelon);
+        bitmapPoison = BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.poison);
     }
 
-    // метод рисует змейку и фрукты
+    // метод рисует змейку и другие объекты
     public void drawSnake(Canvas canvas){
 
         int width = canvas.getWidth();
@@ -48,6 +50,7 @@ public class GameSurface extends SurfaceView{
         Bitmap backGround = Bitmap.createScaledBitmap(bitmapBackGround, x, y, true);
         Bitmap apple = Bitmap.createScaledBitmap(bitmapApple, x, y, true);
         Bitmap watermelon = Bitmap.createScaledBitmap(bitmapWatermelon, x, y, true);
+        Bitmap poison = Bitmap.createScaledBitmap(bitmapPoison, x, y, true);
 
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
@@ -62,6 +65,9 @@ public class GameSurface extends SurfaceView{
                 }
                 if(game.getField()[i][j] == 3) {
                     canvas.drawBitmap(watermelon, x * i, y * j, paint);
+                }
+                if(game.getField()[i][j] == 4) {
+                    canvas.drawBitmap(poison, x * i, y * j, paint);
                 }
             }
         }
