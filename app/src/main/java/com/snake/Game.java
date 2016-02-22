@@ -70,7 +70,7 @@ public class Game{
     // добавляем мухомор
     private void addPoison(){
 
-        int i = 5;
+        int i = 9;
         while(i > 0){
             boolean isTrue = true;
             while(isTrue){
@@ -159,7 +159,7 @@ public class Game{
             case 1:
                 return false;
             case 2:
-                isGrowing += 2;
+//                isGrowing += 1;
                 score += 10;
 
                 field[x][y] = 0;
@@ -169,7 +169,7 @@ public class Game{
                 addFruit();
                 return true;
             case 3:
-                isGrowing += 3;
+                isGrowing += 1;
                 score += 20;
 
                 field[x][y] = 0;
@@ -179,7 +179,17 @@ public class Game{
                 addFruit();
                 return true;
             case 4:
-                return false;
+                if(snake.size() > 3 && score >= 10){
+                    field[snake.get(0).getPosByX()][snake.get(0).getPosByY()] = 0;
+                    snake.remove(0);
+                    score -= 10;
+                    field[x][y] = 0;
+                }
+                else{
+                    return false;
+                }
+
+                return true;
             default:
                 return false;
         }
