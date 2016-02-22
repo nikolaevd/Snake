@@ -10,8 +10,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
-public class GameActivity extends Activity implements SensorEventListener {
+public class GameActivity extends Activity implements SensorEventListener{
 
     GameSurface gameSurface;
     Timer timer;
@@ -38,11 +39,12 @@ public class GameActivity extends Activity implements SensorEventListener {
         // инициализируем акселерометр
         SensorManager = (SensorManager) getSystemService(Activity.SENSOR_SERVICE);
         List<Sensor> sensors = SensorManager.getSensorList(Sensor.TYPE_ALL);
-        if(sensors.size() > 0) {
-            for(Sensor sensor : sensors) {
-                if(sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-                    if(accelerometer == null)
+        if(sensors.size() > 0){
+            for(Sensor sensor : sensors){
+                if(sensor.getType() == Sensor.TYPE_ACCELEROMETER){
+                    if(accelerometer == null){
                         accelerometer = sensor;
+                    }
                 }
             }
         }
@@ -57,10 +59,10 @@ public class GameActivity extends Activity implements SensorEventListener {
         timer.scheduleAtFixedRate(new GraphUpdater(gameSurface), 0, 100);
         // таймер обновления положения змейки
         timer.scheduleAtFixedRate(new StepUpdater(this), 0, 500);
-        // регистрируем форму как объект, слушающий изменения датчика - акселерометра
+        // регистрируем текущую активити как объект, слушающий изменения датчика - акселерометра
         SensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
         this.firstTime = true;
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @Override
@@ -81,7 +83,7 @@ public class GameActivity extends Activity implements SensorEventListener {
     // в каком направлении должна двигаться змея
     private int getDirection(float x, float y){
 
-        if(Math.abs(x) > Math.abs(y)) {
+        if(Math.abs(x) > Math.abs(y)){
             if(x > 0){
                 return Game.WEST;
             }
@@ -119,7 +121,7 @@ public class GameActivity extends Activity implements SensorEventListener {
             gameSurface.game.setCurDirection(this.getDirection(dirX, dirY));
         }
         else{
-            // Если игра только началась делаем поправку на начальное
+            // если игра только началась делаем поправку на начальное
             // положение телефона
             this.firstTime = false;
             SSX = SX;

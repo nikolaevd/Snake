@@ -8,10 +8,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.SurfaceView;
 
-public class GameSurface extends SurfaceView {
+public class GameSurface extends SurfaceView{
 
     Game game;
-    Bitmap bitmapHead, bitmapTill, bitmapBody, bitmapBackGround, bitmapFruit;
+    Bitmap bitmapHead, bitmapTill, bitmapBody, bitmapBackGround, bitmapApple, bitmapWatermelon;
     float x, y;
 
     // в консрукторе загружаем битмапы (из ресурсов) и добавляем метод обратного вызова для Surface
@@ -28,8 +28,10 @@ public class GameSurface extends SurfaceView {
                 R.drawable.body);
         bitmapBackGround = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.back_ground);
-        bitmapFruit = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.fruit);
+        bitmapApple = BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.apple);
+        bitmapWatermelon = BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.watermelon);
     }
 
     // метод рисует змейку и фрукты
@@ -44,7 +46,8 @@ public class GameSurface extends SurfaceView {
         Bitmap body = Bitmap.createScaledBitmap(bitmapBody, x, y, true);
         Bitmap till = Bitmap.createScaledBitmap(bitmapTill, x, y, true);
         Bitmap backGround = Bitmap.createScaledBitmap(bitmapBackGround, x, y, true);
-        Bitmap fruit = Bitmap.createScaledBitmap(bitmapFruit, x, y, true);
+        Bitmap apple = Bitmap.createScaledBitmap(bitmapApple, x, y, true);
+        Bitmap watermelon = Bitmap.createScaledBitmap(bitmapWatermelon, x, y, true);
 
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
@@ -54,8 +57,11 @@ public class GameSurface extends SurfaceView {
         for(int i = 0; i < Game.sizeByX; i++) {
             for(int j = 0; j < Game.sizeByY; j++) {
                 canvas.drawBitmap(backGround, x * i, y * j, paint);
-                if(game.getField()[i][j] > 1) {
-                    canvas.drawBitmap(fruit, x * i, y * j, paint);
+                if(game.getField()[i][j] == 2) {
+                    canvas.drawBitmap(apple, x * i, y * j, paint);
+                }
+                if(game.getField()[i][j] == 3) {
+                    canvas.drawBitmap(watermelon, x * i, y * j, paint);
                 }
             }
         }

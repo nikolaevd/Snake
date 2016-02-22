@@ -7,6 +7,7 @@ import java.util.ArrayList;
      0 - пустая ячейка
      1 - ячейку занимает тело змеи
      2 - ячейку занимает фрукт
+     3 - ячейку занимает арбуз ( + 20 очков )
 */
 
 public class Game{
@@ -45,20 +46,20 @@ public class Game{
         snake.add(new Position(2, 4));
         field[2][4] = 1;
 
-        AddFruit();
+        addFruit();
     }
 
     // добавить фрукт на игровое поле
-    private void AddFruit(){
+    private void addFruit(){
 
-        boolean bFlag = true;
+        boolean isTrue = true;
 
-        while(bFlag){
+        while(isTrue){
             int x = (int)(Math.random() * sizeByX);
             int y = (int)(Math.random() * sizeByY);
             if(field[x][y] == 0){
-                bFlag = false;
-                field[x][y] = 2;
+                isTrue = false;
+                field[x][y] = (2 + (int)(Math.random() * ((3 - 2) + 1)));
             }
         }
 
@@ -144,7 +145,17 @@ public class Game{
                 snake.add(new Position(x, y));
                 field[x][y] = 1;
 
-                AddFruit();
+                addFruit();
+                return true;
+            case 3:
+                isGrowing += 3;
+                score += 20;
+
+                field[x][y] = 0;
+                snake.add(new Position(x, y));
+                field[x][y] = 1;
+
+                addFruit();
                 return true;
             default:
                 return false;
