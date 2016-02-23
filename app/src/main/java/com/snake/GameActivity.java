@@ -133,7 +133,7 @@ public class GameActivity extends Activity implements SensorEventListener{
     public void Step(){
 
         // если ход не удался то закрываем текущую активити
-        if(!gameSurface.game.nextMove()) {
+        if(!gameSurface.game.nextMove()){
             MainActivity.GAME_MODE = 1;
             this.finish();
         }

@@ -86,7 +86,7 @@ public class Game{
 
     }
 
-    // выполнить шаг в заданном направлении
+    // сделать шаг в заданном направлении
     public boolean nextMove(){
 
         switch(curDirection){
@@ -210,10 +210,6 @@ public class Game{
     public int getSnakeLength() {
         return snake.size();
     }
-
-//    public int getCurDirection() {
-//        return curDirection;
-//    }
 
     public void setCurDirection(int curDirection) {
         this.curDirection = curDirection;
