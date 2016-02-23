@@ -10,11 +10,6 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity implements OnClickListener{
 
-    // 0 - первый запуск
-    // 1 - запуск при переходе на следующий уровень
-    // 2 - запуск после проигрыша
-    public static int GAME_MODE = 0;
-
     private TextView textView;
     private Button button;
 
@@ -28,12 +23,12 @@ public class MainActivity extends Activity implements OnClickListener{
 
         super.onStart();
 
-        if(GAME_MODE == 0){
+        if(Game.MODE == 0){
             setContentView(R.layout.activity_main);
             button = (Button) this.findViewById(R.id.button0);
             button.setOnClickListener(this);
         }
-        else if(GAME_MODE == 1){
+        else if(Game.MODE == 1){
             setContentView(R.layout.activity_lose);
             button = (Button) this.findViewById(R.id.button1);
             button.setText("Продолжить");
@@ -57,7 +52,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
         Intent intent = new Intent(this, com.snake.GameActivity.class);
 
-        switch(GAME_MODE){
+        switch(Game.MODE){
             case 0:
                 Game.SCORE = 0;
                 Game.LEVEL = 1;
