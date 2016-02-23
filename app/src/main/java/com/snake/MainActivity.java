@@ -14,7 +14,6 @@ public class MainActivity extends Activity implements OnClickListener{
     // 1 - запуск при переходе на следующий уровень
     // 2 - запуск после проигрыша
     public static int GAME_MODE = 0;
-    public static int GAME_LEVEL = 0;
 
     private TextView textView;
     private Button button;
@@ -39,7 +38,7 @@ public class MainActivity extends Activity implements OnClickListener{
             button = (Button) this.findViewById(R.id.button1);
             button.setText("Продолжить");
             textView = (TextView) this.findViewById(R.id.textView);
-            textView.setText("Уровень " + (GAME_LEVEL - 1) + " пройден.");
+            textView.setText("Уровень " + (Game.LEVEL - 1) + " пройден.");
             button.setOnClickListener(this);
         }
         else{
@@ -61,14 +60,14 @@ public class MainActivity extends Activity implements OnClickListener{
         switch(GAME_MODE){
             case 0:
                 Game.SCORE = 0;
-                GAME_LEVEL = 1;
+                Game.LEVEL = 1;
                 break;
             case 1:
                 // непонятно, почему не переходиит на GameActivity
                 break;
             case 2:
                 Game.SCORE = 0;
-                GAME_LEVEL = 1;
+                Game.LEVEL = 1;
                 break;
         }
 

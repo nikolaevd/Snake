@@ -25,6 +25,7 @@ public class Game{
 
     // переменная хранит набранные очки
     public static int SCORE = 0;
+    public static int LEVEL = 1;
     // признак - растет ли змейка
     private int isGrowing = 0;
     // массив представляет собой игровое поле
