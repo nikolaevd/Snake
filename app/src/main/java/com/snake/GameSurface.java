@@ -42,8 +42,8 @@ public class GameSurface extends SurfaceView{
 
         int width = canvas.getWidth();
         int height = canvas.getHeight();
-        int x = width / Game.sizeByX;
-        int y = height / Game.sizeByY;
+        int x = width / Game.SIZE_BY_X;
+        int y = height / Game.SIZE_BY_Y;
 
         Bitmap head = Bitmap.createScaledBitmap(bitmapHead, x, y, true);
         Bitmap body = Bitmap.createScaledBitmap(bitmapBody, x, y, true);
@@ -58,8 +58,8 @@ public class GameSurface extends SurfaceView{
         paint.setAlpha(128);
 
         // рисуем игровое поле с фруктами на нем
-        for(int i = 0; i < Game.sizeByX; i++) {
-            for(int j = 0; j < Game.sizeByY; j++) {
+        for(int i = 0; i < Game.SIZE_BY_X; i++) {
+            for(int j = 0; j < Game.SIZE_BY_Y; j++) {
                 canvas.drawBitmap(backGround, x * i, y * j, paint);
                 if(game.getField()[i][j] == 2) {
                     canvas.drawBitmap(apple, x * i, y * j, paint);

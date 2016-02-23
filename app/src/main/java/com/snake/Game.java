@@ -13,8 +13,9 @@ import java.util.ArrayList;
 
 public class Game{
 
-    public static final int sizeByX = 18;
-    public static final int sizeByY = 30;
+    // размеры игрового поля
+    public static final int SIZE_BY_X = 18;
+    public static final int SIZE_BY_Y = 30;
 
     // направление движения
     public static final int NORTH = 1;
@@ -23,19 +24,19 @@ public class Game{
     public static final int WEST = 4;
 
     // переменная хранит набранные очки
-    private int score = 0;
+    public static int score = 0;
     // признак - растет ли змейка
     private int isGrowing = 0;
     // массив представляет собой игровое поле
-    private int[][] field = new int[sizeByX][sizeByY];
+    private int[][] field = new int[SIZE_BY_X][SIZE_BY_Y];
     // тело змейки
     private ArrayList<Position> snake = new ArrayList<Position>();
     // переменная содержит текущее направление
     private int curDirection = Game.EAST;
 
     Game(){
-        for(int x = 0; x < sizeByX; x++){
-            for(int y = 0; y < sizeByY; y++){
+        for(int x = 0; x < SIZE_BY_X; x++){
+            for(int y = 0; y < SIZE_BY_Y; y++){
                 field[x][y] = 0;
             }
         }
@@ -57,8 +58,8 @@ public class Game{
         boolean isTrue = true;
 
         while(isTrue){
-            int x = (int)(Math.random() * sizeByX);
-            int y = (int)(Math.random() * sizeByY);
+            int x = (int)(Math.random() * SIZE_BY_X);
+            int y = (int)(Math.random() * SIZE_BY_Y);
             if(field[x][y] == 0){
                 isTrue = false;
                 field[x][y] = (2 + (int)(Math.random() * ((3 - 2) + 1)));
@@ -74,8 +75,8 @@ public class Game{
         while(i > 0){
             boolean isTrue = true;
             while(isTrue){
-                int x = (int)(Math.random() * sizeByX);
-                int y = (int)(Math.random() * sizeByY);
+                int x = (int)(Math.random() * SIZE_BY_X);
+                int y = (int)(Math.random() * SIZE_BY_Y);
                 if(field[x][y] == 0){
                     isTrue = false;
                     field[x][y] = 4;
@@ -137,7 +138,7 @@ public class Game{
 
     // проверить, не упирается ли змейка в границы игрового поля
     private boolean checkBorder(int x, int y){
-        if(x >= 0 && x < sizeByX && y >= 0 && y < sizeByY){
+        if(x >= 0 && x < SIZE_BY_X && y >= 0 && y < SIZE_BY_Y){
             return true;
         }
         return false;
@@ -195,9 +196,9 @@ public class Game{
         }
     }
 
-    public int getScore() {
-        return score;
-    }
+//    public int getScore() {
+//        return score;
+//    }
 
     public int[][] getField() {
         return field;
@@ -214,9 +215,5 @@ public class Game{
     public void setCurDirection(int curDirection) {
         this.curDirection = curDirection;
     }
-
-//    public void clearScore(){
-//        this.score = 0;
-//    }
 
 }

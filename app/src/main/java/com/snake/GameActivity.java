@@ -105,11 +105,10 @@ public class GameActivity extends Activity implements SensorEventListener{
 
     }
 
-
     // обработка изменений ориентации телефона в пространстве
     @Override
     public void onSensorChanged(SensorEvent event){
-		gameSurface.setText("Набрано очков: " + MainActivity.GAME_SCORE + "\nУровень: " + MainActivity.GAME_LEVEL);
+		gameSurface.setText("Набрано очков: " + MainActivity.GAME_SCORE + " Уровень: " + MainActivity.GAME_LEVEL);
         // получаем показания датчика
         SX = event.values[0];
         SY = event.values[1];
@@ -138,32 +137,24 @@ public class GameActivity extends Activity implements SensorEventListener{
 
         // если ход не удался то закрываем текущую активити
         if(!gameSurface.getGame().nextMove()){
-            MainActivity.GAME_MODE = 1;
+            MainActivity.GAME_MODE = 2;
             this.finish();
         }
         // обновляем очки в стартовой активити
         // в зависимости от набронного количества повыщаем уровень (увеличиваем скорость)
         else{
-            if(MainActivity.GAME_SCORE > 30 && MainActivity.GAME_SCORE < 70){
-                timer.scheduleAtFixedRate(new StepUpdater(this), 0, 400);
-                MainActivity.GAME_LEVEL = 1;
+            MainActivity.GAME_SCORE = this.gameSurface.getGame().score;
+
+            if(MainActivity.GAME_SCORE >= 30 && MainActivity.GAME_SCORE <= 40){
+                MainActivity.GAME_MODE = 1;
+                MainActivity.GAME_LEVEL = 2;
+                this.finish();
             }
-//            if(MainActivity.GAME_SCORE >= 70 && MainActivity.GAME_SCORE < 120){
-//                timer.scheduleAtFixedRate(new StepUpdater(this), 0, 300);
-//                MainActivity.GAME_LEVEL = 2;
-//            }
-//            if(MainActivity.GAME_SCORE >= 120 && MainActivity.GAME_SCORE < 180){
-//                timer.scheduleAtFixedRate(new StepUpdater(this), 0, 350);
-//            }
-//            if(MainActivity.GAME_SCORE >= 180 && MainActivity.GAME_SCORE < 250){
-//                timer.scheduleAtFixedRate(new StepUpdater(this), 0, 300);
-//            }
-//            if(MainActivity.GAME_MODE >= 250){
-//                timer.scheduleAtFixedRate(new StepUpdater(this), 0, 250);
-//            }
-
-            MainActivity.GAME_SCORE = this.gameSurface.getGame().getScore();
-
+            if(MainActivity.GAME_SCORE >= 60 && MainActivity.GAME_SCORE <= 70){
+                MainActivity.GAME_MODE = 1;
+                MainActivity.GAME_LEVEL = 3;
+                this.finish();
+            }
         }
 
     }
