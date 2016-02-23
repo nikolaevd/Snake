@@ -58,7 +58,7 @@ public class MainActivity extends Activity implements OnClickListener{
                 Game.LEVEL = 1;
                 break;
             case 1:
-                // непонятно, почему не переходиит на GameActivity
+                Game.SCORE = 0;
                 break;
             case 2:
                 Game.SCORE = 0;
@@ -69,4 +69,5 @@ public class MainActivity extends Activity implements OnClickListener{
         this.startActivity(intent);
 
     }
+
 }

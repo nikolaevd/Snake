@@ -18,6 +18,8 @@ public class GameActivity extends Activity implements SensorEventListener{
     private Timer timer;
     private int width, height;
 
+    private static int SNAKE_SPEED = 500;
+
     private SensorManager sensorManager;
     private Sensor accelerometer;
 
@@ -58,7 +60,10 @@ public class GameActivity extends Activity implements SensorEventListener{
         // таймер обновления картинки на экране
         timer.scheduleAtFixedRate(new GraphUpdater(gameSurface), 0, 100);
         // таймер обновления положения змейки
-        timer.scheduleAtFixedRate(new StepUpdater(this), 0, 400);
+        if(SNAKE_SPEED >= 300){
+            SNAKE_SPEED -= 50;
+            timer.scheduleAtFixedRate(new StepUpdater(this), 0, SNAKE_SPEED);
+        }
         // регистрируем текущую активити как объект, слушающий изменения датчика - акселерометра
         sensorManager.registerListener(this, accelerometer, sensorManager.SENSOR_DELAY_GAME);
         this.firstTime = true;
@@ -139,19 +144,14 @@ public class GameActivity extends Activity implements SensorEventListener{
 
         // если ход не удался то закрываем текущую активити
         if(!gameSurface.getGame().nextMove()){
+            SNAKE_SPEED = 500;
             Game.MODE = 2;
             this.finish();
         }
-        // обновляем очки в стартовой активити
-        // в зависимости от набронного количества очков повышаем уровень и скорость движения змейки
+        // переключаем уровень
         else{
-            if(Game.SCORE >= 60 && Game.SCORE <= 70){
-                Game.LEVEL = 2;
-                Game.MODE = 1;
-                this.finish();
-            }
-            else if(Game.SCORE >= 120 && Game.SCORE <= 130){
-                Game.LEVEL = 3;
+            if(Game.SCORE >= 50){
+                Game.LEVEL++;
                 Game.MODE = 1;
                 this.finish();
             }
