@@ -94,7 +94,7 @@ public class Game{
                 int nextX = snake.get(snake.size() - 1).getPosByX();
                 int nextY = snake.get(snake.size() - 1).getPosByY() + 1;
                 if(checkBorder(nextX, nextY)){
-                    return checkNextPosition(nextX, nextY);
+                    return makeMove(nextX, nextY);
                 }
                 else{
                     return false;
@@ -104,7 +104,7 @@ public class Game{
                 int nextX = snake.get(snake.size() - 1).getPosByX() + 1;
                 int nextY = snake.get(snake.size() - 1).getPosByY();
                 if(checkBorder(nextX, nextY)){
-                    return checkNextPosition(nextX, nextY);
+                    return makeMove(nextX, nextY);
                 }
                 else{
                     return false;
@@ -114,7 +114,7 @@ public class Game{
                 int nextX = snake.get(snake.size() - 1).getPosByX();
                 int nextY = snake.get(snake.size() - 1).getPosByY() - 1;
                 if(checkBorder(nextX, nextY)){
-                    return checkNextPosition(nextX, nextY);
+                    return makeMove(nextX, nextY);
                 }
                 else{
                     return false;
@@ -124,7 +124,7 @@ public class Game{
                 int nextX = snake.get(snake.size() - 1).getPosByX() - 1;
                 int nextY = snake.get(snake.size() - 1).getPosByY();
                 if(checkBorder(nextX, nextY)){
-                    return checkNextPosition(nextX, nextY);
+                    return makeMove(nextX, nextY);
                 }
                 else{
                     return false;
@@ -143,7 +143,8 @@ public class Game{
         return false;
     }
 
-    private boolean checkNextPosition(int x, int y){
+    // делаем ход
+    private boolean makeMove(int x, int y){
         switch (field[x][y]) {
             case 0:
                 if(isGrowing > 0){
@@ -159,7 +160,6 @@ public class Game{
             case 1:
                 return false;
             case 2:
-//                isGrowing += 1;
                 score += 10;
 
                 field[x][y] = 0;
@@ -211,16 +211,16 @@ public class Game{
         return snake.size();
     }
 
-    public int getCurDirection() {
-        return curDirection;
-    }
+//    public int getCurDirection() {
+//        return curDirection;
+//    }
 
     public void setCurDirection(int curDirection) {
         this.curDirection = curDirection;
     }
 
-    public void clearScore(){
-        this.score = 0;
-    }
+//    public void clearScore(){
+//        this.score = 0;
+//    }
 
 }
