@@ -216,4 +216,8 @@ public class Game{
         this.curDirection = curDirection;
     }
 
+    public static void clearScore(){
+        score = 0;
+    }
+
 }

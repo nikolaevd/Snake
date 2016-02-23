@@ -36,14 +36,14 @@ public class MainActivity extends Activity implements OnClickListener{
                 button = (Button) this.findViewById(R.id.button0);
                 button.setOnClickListener(this);
                 break;
-            case 1:
-                setContentView(R.layout.activity_lose);
-                button = (Button) this.findViewById(R.id.button1);
-                button.setText("Продолжить");
-                textView = (TextView) this.findViewById(R.id.textView);
-                textView.setText("Уровень " + (GAME_LEVEL - 1) + " пройден.");
-                button.setOnClickListener(this);
-                break;
+//            case 1:
+//                setContentView(R.layout.activity_lose);
+//                button = (Button) this.findViewById(R.id.button1);
+//                button.setText("Продолжить");
+//                textView = (TextView) this.findViewById(R.id.textView);
+//                textView.setText("Уровень " + (GAME_LEVEL - 1) + " пройден.");
+//                button.setOnClickListener(this);
+//                break;
             case 2:
                 setContentView(R.layout.activity_lose);
                 button = (Button) this.findViewById(R.id.button1);
@@ -70,6 +70,7 @@ public class MainActivity extends Activity implements OnClickListener{
                 // непонятно, почему не переходиит на GameActivity
                 break;
             case 2:
+
                 GAME_SCORE = 0;
                 GAME_LEVEL = 1;
                 break;
