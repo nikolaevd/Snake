@@ -14,7 +14,6 @@ public class MainActivity extends Activity implements OnClickListener{
     // 1 - запуск при переходе на следующий уровень
     // 2 - запуск после проигрыша
     public static int GAME_MODE = 0;
-    public static int GAME_SCORE = 0;
     public static int GAME_LEVEL = 0;
 
     private TextView textView;
@@ -30,28 +29,26 @@ public class MainActivity extends Activity implements OnClickListener{
 
         super.onStart();
 
-        switch(GAME_MODE){
-            case 0:
-                setContentView(R.layout.activity_main);
-                button = (Button) this.findViewById(R.id.button0);
-                button.setOnClickListener(this);
-                break;
-//            case 1:
-//                setContentView(R.layout.activity_lose);
-//                button = (Button) this.findViewById(R.id.button1);
-//                button.setText("Продолжить");
-//                textView = (TextView) this.findViewById(R.id.textView);
-//                textView.setText("Уровень " + (GAME_LEVEL - 1) + " пройден.");
-//                button.setOnClickListener(this);
-//                break;
-            case 2:
-                setContentView(R.layout.activity_lose);
-                button = (Button) this.findViewById(R.id.button1);
-                button.setText("Заново");
-                textView = (TextView) this.findViewById(R.id.textView);
-			    textView.setText("Вы набрали " + GAME_SCORE + " очков.");
-                button.setOnClickListener(this);
-                break;
+        if(GAME_MODE == 0){
+            setContentView(R.layout.activity_main);
+            button = (Button) this.findViewById(R.id.button0);
+            button.setOnClickListener(this);
+        }
+        else if(GAME_MODE == 1){
+            setContentView(R.layout.activity_lose);
+            button = (Button) this.findViewById(R.id.button1);
+            button.setText("Продолжить");
+            textView = (TextView) this.findViewById(R.id.textView);
+            textView.setText("Уровень " + (GAME_LEVEL - 1) + " пройден.");
+            button.setOnClickListener(this);
+        }
+        else{
+            setContentView(R.layout.activity_lose);
+            button = (Button) this.findViewById(R.id.button1);
+            button.setText("Заново");
+            textView = (TextView) this.findViewById(R.id.textView);
+            textView.setText("Вы набрали " + Game.SCORE + " очков.");
+            button.setOnClickListener(this);
         }
 
     }
@@ -63,7 +60,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
         switch(GAME_MODE){
             case 0:
-                GAME_SCORE = 0;
+                Game.SCORE = 0;
                 GAME_LEVEL = 1;
                 break;
             case 1:
@@ -71,7 +68,7 @@ public class MainActivity extends Activity implements OnClickListener{
                 break;
             case 2:
 
-                GAME_SCORE = 0;
+                Game.SCORE = 0;
                 GAME_LEVEL = 1;
                 break;
         }

@@ -110,7 +110,7 @@ public class GameActivity extends Activity implements SensorEventListener{
     @Override
     public void onSensorChanged(SensorEvent event){
 
-		gameSurface.setText("Набрано очков: " + MainActivity.GAME_SCORE + " Уровень: " + MainActivity.GAME_LEVEL);
+		gameSurface.setText("Набрано очков: " + Game.SCORE + " Уровень: " + MainActivity.GAME_LEVEL);
         // получаем показания датчика
         SX = event.values[0];
         SY = event.values[1];
@@ -140,20 +140,18 @@ public class GameActivity extends Activity implements SensorEventListener{
         // если ход не удался то закрываем текущую активити
         if(!gameSurface.getGame().nextMove()){
             MainActivity.GAME_MODE = 2;
-            Game.clearScore();
+            Game.SCORE = 0;
             this.finish();
         }
         // обновляем очки в стартовой активити
         // в зависимости от набронного количества очков повышаем уровень и скорость движения змейки
         else{
-            MainActivity.GAME_SCORE = this.gameSurface.getGame().score;
-
-            if(MainActivity.GAME_SCORE >= 60 && MainActivity.GAME_SCORE <= 70){
+            if(Game.SCORE >= 60 && Game.SCORE <= 70){
                 MainActivity.GAME_LEVEL = 2;
                 MainActivity.GAME_MODE = 1;
                 this.finish();
             }
-            else if(MainActivity.GAME_SCORE >= 120 && MainActivity.GAME_SCORE <= 130){
+            else if(Game.SCORE >= 120 && Game.SCORE <= 130){
                 MainActivity.GAME_LEVEL = 3;
                 MainActivity.GAME_MODE = 1;
                 this.finish();

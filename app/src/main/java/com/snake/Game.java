@@ -24,7 +24,7 @@ public class Game{
     public static final int WEST = 4;
 
     // переменная хранит набранные очки
-    public static int score = 0;
+    public static int SCORE = 0;
     // признак - растет ли змейка
     private int isGrowing = 0;
     // массив представляет собой игровое поле
@@ -161,7 +161,7 @@ public class Game{
             case 1:
                 return false;
             case 2:
-                score += 10;
+                SCORE += 10;
 
                 field[x][y] = 0;
                 snake.add(new Position(x, y));
@@ -171,7 +171,7 @@ public class Game{
                 return true;
             case 3:
                 isGrowing += 1;
-                score += 20;
+                SCORE += 20;
 
                 field[x][y] = 0;
                 snake.add(new Position(x, y));
@@ -180,10 +180,10 @@ public class Game{
                 addFruit();
                 return true;
             case 4:
-                if(snake.size() > 3 && score >= 10){
+                if(snake.size() > 3 && SCORE >= 10){
                     field[snake.get(0).getPosByX()][snake.get(0).getPosByY()] = 0;
                     snake.remove(0);
-                    score -= 10;
+                    SCORE -= 10;
                     field[x][y] = 0;
                 }
                 else{
@@ -195,10 +195,6 @@ public class Game{
                 return false;
         }
     }
-
-//    public int getScore() {
-//        return score;
-//    }
 
     public int[][] getField() {
         return field;
@@ -214,10 +210,6 @@ public class Game{
 
     public void setCurDirection(int curDirection) {
         this.curDirection = curDirection;
-    }
-
-    public static void clearScore(){
-        score = 0;
     }
 
 }
