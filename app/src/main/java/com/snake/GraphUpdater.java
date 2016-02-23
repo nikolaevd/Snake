@@ -7,7 +7,7 @@ import java.util.TimerTask;
 
 public class GraphUpdater extends TimerTask{
 
-    GameSurface gameSurface;
+    private GameSurface gameSurface;
 
     GraphUpdater(GameSurface gameSurface){
         this.gameSurface = gameSurface;

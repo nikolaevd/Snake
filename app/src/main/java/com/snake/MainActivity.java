@@ -14,6 +14,7 @@ public class MainActivity extends Activity implements OnClickListener{
     // 1 - запуск после проигрыша
     public static int GAME_MODE = 0;
     public static int GAME_SCORE = 0;
+    public static int GAME_LEVEL = 0;
 
     TextView textView;
     Button button;

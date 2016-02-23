@@ -4,7 +4,7 @@ import java.util.TimerTask;
 
 public class StepUpdater extends TimerTask{
 
-    GameActivity gameActivity;
+    private GameActivity gameActivity;
 
     StepUpdater(GameActivity gameActivity){
         this.gameActivity = gameActivity;
@@ -12,7 +12,7 @@ public class StepUpdater extends TimerTask{
 
     @Override
     public void run(){
-        gameActivity.Step();
+        gameActivity.step();
     }
 
 }

@@ -10,9 +10,10 @@ import android.view.SurfaceView;
 
 public class GameSurface extends SurfaceView{
 
-    Game game;
-    Bitmap bitmapHead, bitmapTill, bitmapBody, bitmapBackGround, bitmapApple, bitmapWatermelon, bitmapPoison;
-    float x, y;
+    private Game game;
+    private String text = " ";
+    private Bitmap bitmapHead, bitmapTill, bitmapBody, bitmapBackGround, bitmapApple, bitmapWatermelon, bitmapPoison;
+    private float x, y;
 
     // в консрукторе загружаем битмапы (из ресурсов) и добавляем метод обратного вызова для Surface
     public GameSurface(Context context){
@@ -86,7 +87,19 @@ public class GameSurface extends SurfaceView{
                         .getSnake().get(i).getPosByY() * y, new Paint());
             }
         }
+		
+		paint.setColor(Color.WHITE);
+		paint.setAlpha(255);
+		paint.setTextSize(25);
+		canvas.drawText(text, 50, 50, paint);
 
     }
 
+    public Game getGame() {
+        return game;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 }

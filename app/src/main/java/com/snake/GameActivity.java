@@ -14,16 +14,16 @@ import android.view.WindowManager;
 
 public class GameActivity extends Activity implements SensorEventListener{
 
-    GameSurface gameSurface;
-    Timer timer;
-    int width, height;
+    private GameSurface gameSurface;
+    private Timer timer;
+    private int width, height;
 
-    SensorManager SensorManager;
-    Sensor accelerometer;
-    
-    float SSX = 0, SSY = 0;
-    float SX = 0, SY = 0;
-    boolean firstTime;
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+
+    private float SSX = 0, SSY = 0;
+    private float SX = 0, SY = 0;
+    private boolean firstTime;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -37,8 +37,8 @@ public class GameActivity extends Activity implements SensorEventListener{
         width = displaymetrics.heightPixels;
 
         // инициализируем акселерометр
-        SensorManager = (SensorManager) getSystemService(Activity.SENSOR_SERVICE);
-        List<Sensor> sensors = SensorManager.getSensorList(Sensor.TYPE_ALL);
+        sensorManager = (SensorManager) getSystemService(Activity.SENSOR_SERVICE);
+        List<Sensor> sensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
         if(sensors.size() > 0){
             for(Sensor sensor : sensors){
                 if(sensor.getType() == Sensor.TYPE_ACCELEROMETER){
@@ -60,19 +60,22 @@ public class GameActivity extends Activity implements SensorEventListener{
         // таймер обновления положения змейки
         timer.scheduleAtFixedRate(new StepUpdater(this), 0, 500);
         // регистрируем текущую активити как объект, слушающий изменения датчика - акселерометра
-        SensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
+        sensorManager.registerListener(this, accelerometer, sensorManager.SENSOR_DELAY_GAME);
         this.firstTime = true;
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
     }
 
     @Override
     public void onStop() {
+
         super.onStop();
         // останавливаем таймеры
         timer.cancel();
         timer.purge();
         // отписываемся от получения сообщений об изменении от датчика
-        SensorManager.unregisterListener(this);
+        sensorManager.unregisterListener(this);
+
     }
 
     @Override
@@ -106,7 +109,7 @@ public class GameActivity extends Activity implements SensorEventListener{
     // обработка изменений ориентации телефона в пространстве
     @Override
     public void onSensorChanged(SensorEvent event){
-
+		gameSurface.setText("Набрано очков: " + MainActivity.GAME_SCORE + "\nУровень: " + MainActivity.GAME_LEVEL);
         // получаем показания датчика
         SX = event.values[0];
         SY = event.values[1];
@@ -118,7 +121,7 @@ public class GameActivity extends Activity implements SensorEventListener{
             float dirX = SX - SSX;
             float dirY = SY - SSY;
             // устанавливаем для змеи новое направление
-            gameSurface.game.setCurDirection(this.getDirection(dirX, dirY));
+            gameSurface.getGame().setCurDirection(this.getDirection(dirX, dirY));
         }
         else{
             // если игра только началась делаем поправку на начальное
@@ -127,19 +130,40 @@ public class GameActivity extends Activity implements SensorEventListener{
             SSX = SX;
             SSY = SY;
         }
+
     }
 
     // в методе происходит движение змейки в зависимости от ее направления
-    public void Step(){
+    public void step(){
 
         // если ход не удался то закрываем текущую активити
-        if(!gameSurface.game.nextMove()){
+        if(!gameSurface.getGame().nextMove()){
             MainActivity.GAME_MODE = 1;
             this.finish();
         }
-        // если все впорядке то обновляем очки в стартовой активити
+        // обновляем очки в стартовой активити
+        // в зависимости от набронного количества повыщаем уровень (увеличиваем скорость)
         else{
-            MainActivity.GAME_SCORE = this.gameSurface.game.getScore();
+            if(MainActivity.GAME_SCORE > 30 && MainActivity.GAME_SCORE < 70){
+                timer.scheduleAtFixedRate(new StepUpdater(this), 0, 400);
+                MainActivity.GAME_LEVEL = 1;
+            }
+//            if(MainActivity.GAME_SCORE >= 70 && MainActivity.GAME_SCORE < 120){
+//                timer.scheduleAtFixedRate(new StepUpdater(this), 0, 300);
+//                MainActivity.GAME_LEVEL = 2;
+//            }
+//            if(MainActivity.GAME_SCORE >= 120 && MainActivity.GAME_SCORE < 180){
+//                timer.scheduleAtFixedRate(new StepUpdater(this), 0, 350);
+//            }
+//            if(MainActivity.GAME_SCORE >= 180 && MainActivity.GAME_SCORE < 250){
+//                timer.scheduleAtFixedRate(new StepUpdater(this), 0, 300);
+//            }
+//            if(MainActivity.GAME_MODE >= 250){
+//                timer.scheduleAtFixedRate(new StepUpdater(this), 0, 250);
+//            }
+
+            MainActivity.GAME_SCORE = this.gameSurface.getGame().getScore();
+
         }
 
     }
