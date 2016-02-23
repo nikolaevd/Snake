@@ -27,14 +27,26 @@ public class GameSurface extends SurfaceView{
                 R.drawable.till);
         bitmapBody = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.body);
-        bitmapBackGround = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.back_ground);
+
+        if(this.getRandomNum() == 1){
+            bitmapBackGround = BitmapFactory.decodeResource(context.getResources(),
+                    R.drawable.blue_square);
+        }
+        else{
+            bitmapBackGround = BitmapFactory.decodeResource(context.getResources(),
+                    R.drawable.wood);
+        }
+
         bitmapApple = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.apple);
         bitmapWatermelon = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.watermelon);
         bitmapPoison = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.poison);
+    }
+
+    private int getRandomNum(){
+        return ((int)(Math.random() * 2));
     }
 
     // метод рисует змейку и другие объекты
@@ -102,4 +114,5 @@ public class GameSurface extends SurfaceView{
     public void setText(String text) {
         this.text = text;
     }
+
 }
