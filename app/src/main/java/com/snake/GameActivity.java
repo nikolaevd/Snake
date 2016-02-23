@@ -150,7 +150,7 @@ public class GameActivity extends Activity implements SensorEventListener{
         }
         // переключаем уровень
         else{
-            if(Game.SCORE >= 50){
+            if(Game.SCORE >= 60){
                 Game.LEVEL++;
                 Game.MODE = 1;
                 this.finish();
