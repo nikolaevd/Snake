@@ -148,14 +148,12 @@ public class GameActivity extends Activity implements SensorEventListener{
         else{
             if(Game.SCORE >= 60 && Game.SCORE <= 70){
                 MainActivity.GAME_LEVEL = 2;
-                MainActivity.GAME_MODE = 1;
-                this.finish();
             }
             else if(Game.SCORE >= 120 && Game.SCORE <= 130){
                 MainActivity.GAME_LEVEL = 3;
-                MainActivity.GAME_MODE = 1;
-                this.finish();
             }
+            MainActivity.GAME_MODE = 1;
+            this.finish();
         }
 
     }

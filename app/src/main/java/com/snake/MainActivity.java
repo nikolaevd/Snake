@@ -67,7 +67,6 @@ public class MainActivity extends Activity implements OnClickListener{
                 // непонятно, почему не переходиит на GameActivity
                 break;
             case 2:
-
                 Game.SCORE = 0;
                 GAME_LEVEL = 1;
                 break;
