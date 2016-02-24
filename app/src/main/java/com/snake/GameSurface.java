@@ -28,7 +28,7 @@ public class GameSurface extends SurfaceView{
         bitmapBody = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.body);
 
-        if(this.getRandomNum() == 1){
+        if(this.getRandomNum() < 7){
             bitmapBackGround = BitmapFactory.decodeResource(context.getResources(),
                     R.drawable.blue_square);
         }
@@ -46,7 +46,7 @@ public class GameSurface extends SurfaceView{
     }
 
     private int getRandomNum(){
-        return ((int)(Math.random() * 2));
+        return ((int)(Math.random() * 10));
     }
 
     // метод рисует змейку и другие объекты
