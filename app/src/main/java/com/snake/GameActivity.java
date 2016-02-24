@@ -60,7 +60,7 @@ public class GameActivity extends Activity implements SensorEventListener{
         // таймер обновления картинки на экране
         timer.scheduleAtFixedRate(new GraphUpdater(gameSurface), 0, 100);
         // таймер обновления положения змейки
-        if(SNAKE_SPEED >= 300){
+        if(SNAKE_SPEED >= 250){
             SNAKE_SPEED -= 50;
             timer.scheduleAtFixedRate(new StepUpdater(this), 0, SNAKE_SPEED);
         }

@@ -24,6 +24,7 @@ public class MainActivity extends Activity implements OnClickListener{
         super.onStart();
 
         if(Game.MODE == 0){
+            Game.LEVEL = 1;
             setContentView(R.layout.activity_main);
             button = (Button) this.findViewById(R.id.button0);
             button.setOnClickListener(this);

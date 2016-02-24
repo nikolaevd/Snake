@@ -29,7 +29,7 @@ public class Game{
 */
     public static int MODE = 0;
     public static int SCORE = 0;
-    public static int LEVEL = 1;
+    public static int LEVEL = 0;
 
     // признак - растет ли змейка
     private int isGrowing = 0;
